@@ -1,0 +1,12 @@
+{
+  "pages":[
+    "pages/index/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#00CED1",
+    "navigationBarTitleText": "小新闻",
+    "navigationBarTextStyle":"white",
+    "enablePullDownRefresh": true
+  }
+}

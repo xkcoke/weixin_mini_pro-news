@@ -9,7 +9,7 @@ Page({
     contents:[]
   },
   onPullDownRefresh(){
-    this.getNewsList()
+    this.getNewsList(wx.stopPullDownRefresh())
   },
   onLoad(){
     this.getCategories()
@@ -35,9 +35,12 @@ Page({
     this.getNewsList()
   },
   onTapContent(event){
-    console.log(event)
+    let index = (event.currentTarget.offsetTop - 37)/115
+    wx.navigateTo({
+      url: '/pages/detail/detail?id='+this.data.contents[index].id,
+    })
   },
-  getNewsList(){
+  getNewsList(callback){
     let that = this
     wx.request({
       url: 'https://test-miniprogram.com/api/news/list',
@@ -51,12 +54,16 @@ Page({
             title: res.data.result[i].title,
             source: res.data.result[i].source,
             time: res.data.result[i].date.substring(11, 16),
-            image: res.data.result[i].firstImage
+            image: res.data.result[i].firstImage,
+            id: res.data.result[i].id
           })
         }
         that.setData({
           contents:contents
         })
+      },
+      complete: function(){
+        callback && callback()
       }
     })
   }

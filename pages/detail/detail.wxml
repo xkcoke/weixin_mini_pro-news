@@ -1,2 +1,16 @@
 <!--pages/detail/detail.wxml-->
-<text>pages/detail/detail.wxml</text>
+<view class="title-wrapper">
+  <view class="news-title">{{title}}</view>
+  <view class="source-time-reads">
+    <view class="news-source">{{source}}</view>
+    <view class="news-time">{{time}}</view>
+    <view class="news-reads">{{reads}}</view>
+  </view>
+</view>
+<view class="detail-wrapper">
+  <view class="detail-list" wx:for="{{details}}">
+    <view wx:if="{{item.detail_type=='strong'}}" class="detail-item-s">{{item.text}}</view>
+    <image wx:if="{{item.detail_type=='image'}}" class="detail-item-i" src="{{item.src}}"></image>
+    <view wx:if="{{item.detail_type=='p'}}" class="detail-item-p">{{item.text}}</view>
+  </view>
+</view>

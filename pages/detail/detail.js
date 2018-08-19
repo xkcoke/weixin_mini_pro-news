@@ -96,9 +96,11 @@ Page({
             })
           }
         }
+        let date = res.data.result.date.substring(5, 10)
+        let time = res.data.result.date.substring(11, 16)
         that.setData({
           title: res.data.result.title,
-          time: res.data.result.date.substring(11, 16),
+          time: date + ' ' + time,
           source: res.data.result.source,
           reads: "阅读 "+res.data.result.readCount,
           details: details

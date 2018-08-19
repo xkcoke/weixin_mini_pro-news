@@ -28,16 +28,14 @@ Page({
     })
   },
   onTapCategory(event){
-    let index = event.currentTarget.offsetLeft / 45
     this.setData({
-      currentItem: categoriesItem[index]
+      currentItem: event.currentTarget.dataset.item
     })
     this.getNewsList()
   },
   onTapContent(event){
-    let index = (event.currentTarget.offsetTop - 37)/115
     wx.navigateTo({
-      url: '/pages/detail/detail?id='+this.data.contents[index].id,
+      url: '/pages/detail/detail?id=' + event.currentTarget.dataset.id,
     })
   },
   getNewsList(callback){
@@ -50,11 +48,15 @@ Page({
       success: function (res) {
         let contents = []
         for(let i = 0; i < res.data.result.length; i+=1){
+          let image = res.data.result[i].firstImage
+          if(image === '') image = '/images/default.jpg'
+          let date = res.data.result[i].date.substring(5, 10)
+          let time = res.data.result[i].date.substring(11, 16)
           contents.push({
             title: res.data.result[i].title,
             source: res.data.result[i].source,
-            time: res.data.result[i].date.substring(11, 16),
-            image: res.data.result[i].firstImage,
+            time: date + ' ' + time,
+            image: image,
             id: res.data.result[i].id
           })
         }

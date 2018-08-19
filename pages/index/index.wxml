@@ -1,13 +1,13 @@
 <view class="category-wrapper">
   <view class="category-list" wx:for="{{categories}}">
     <view wx:if="{{item.item==currentItem}}" class="category-item1">{{item.name}}</view>
-    <view wx:else class="category-item2" bindtap="onTapCategory">{{item.name}}</view>
+    <view wx:else class="category-item2" bindtap="onTapCategory" data-item="{{item.item}}">{{item.name}}</view>
   </view>
 </view>
 
 <view class="content-wrapper">
   <view class="content-list" wx:for="{{contents}}">
-    <view class="content-text-image" bindtap='onTapContent'>
+    <view class="content-text-image" bindtap='onTapContent' data-id="{{item.id}}">
       <view class="content-title-other">
         <view class="news-title">{{item.title}}</view>
         <view class="content-source-time">
